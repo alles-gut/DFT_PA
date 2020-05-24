@@ -12,6 +12,7 @@ def ft (arr, size):
         arr = temp
         col_arr = size[0]
         row_arr = size[1]
+        size_arr = col_arr * row_arr
 
     m = np.ones([col_arr, row_arr])
     n = np.ones([col_arr, row_arr])
@@ -34,6 +35,7 @@ def ft (arr, size):
 def invFt (arr):
     col_arr  = arr.shape[0]
     row_arr  = arr.shape[1]
+    size_arr = arr.size
 
     m = np.ones([col_arr, row_arr])
     n = np.ones([col_arr, row_arr])
