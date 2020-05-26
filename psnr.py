@@ -6,7 +6,7 @@ def psnr(base, obj):
         print("ERROR! shape of input images are not match")
         return -1
 
-    mse = np.sum(base ** 2 - obj ** 2) / base.size
+    mse = np.sum((base - obj) ** 2) / base.size
     psnr = 10 * np.log10(1/mse)
 
     return psnr

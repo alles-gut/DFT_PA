@@ -7,13 +7,14 @@ from conv import *
 from ft import *
 from psnr import *
 
-def generateNoise(size):
+
+def generateNoise(mean, var, size):
     print("Generating noise")
     noise = np.zeros(size)
-    for i in range(size[0]):
-        for j in range(size[1]):
-            noise[i,j] = random.randint(0,255)
-    return noise/255
+    sigma = var**0.5
+    gauss = np.random.normal(mean,sigma,size)
+    return gauss/4
+
 
 if __name__ == '__main__':
 
@@ -39,20 +40,31 @@ if __name__ == '__main__':
     deblur = abs(deblur) / blur_img.size / 255
     print("Task 1 done")
 
+
     #Task 2
     print("Task 2")
+    noise = generateNoise(0, 1e-3, blur_img.size)
     blur_img_noised = blur_img + noise
+
     print("DFT blur_img_noised")
     ft_blur_img_noised = ft(blur_img_noised, blur_img.shape)
     print("IDFT performing - deblur noise/blurred image")
+    K = 
+    noise_deblur = invFt(ft_blur_img_noised / (ft_blur_kernel + K))
     noise_deblur = invFt((abs(ft_blur_kernel) > 6*1e-8)*ft_blur_img_noised/ft_blur_kernel)
     noise_deblur = abs(inv)[0:img.shape[0], 0:img.shape[1]]/blur_img.size
  
 
     #Task 3
     print("Task 3")
-    psnr_task1 = 
-    psnr_task2 = 
+    psnr_task1 = psnr(img, deblur)
+    print("deblur without noise PSNR =", psnr_task1)
+    psnr_task2 = psnr(img, noise_deblur)
+    print("deblur with noise PSNR =", psnr_task2)
+
+
+    #Additional Task - improve deblurring quality
+    print("Additional Task")
 
 
     #show results
