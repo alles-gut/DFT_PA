@@ -1,6 +1,11 @@
+##ft.py
+##perform DFT and IDFT
+
 import numpy as np
 
-#obtain fourier-transform. the imput arr has only real part
+#perform fourier-transform
+#arr  - array input
+#size - after zerro padding size
 def ft (arr, size):
     col_arr  = arr.shape[0]
     row_arr  = arr.shape[1]
