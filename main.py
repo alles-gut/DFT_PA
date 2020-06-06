@@ -50,18 +50,9 @@ if __name__ == '__main__':
     ft_blur_img_noised = ft(blur_img_noised, blur_img.shape)
     print("IDFT performing - deblur noise/blurred image")
 
-    ft_noise = ft(noise, blur_img.shape)
-    print(blur_img_noised)
-    mu_sig = np.mean(blur_img_noised)
-    print(mu_sig)
-    sigma_sig = np.sqrt(np.sum((blur_img_noised - mu_sig)**2)/np.size(blur_img_noised))
-    print('SNR =', mu_sig / sigma_sig)
-
-    snr = np.sqrt(np.std(ft_blur_img_noised)**2/np.std(ft_noise)**2-1)
-    print('SNR_ = ', snr)
-
-    K = 2*1e-6
-    print("  K :", K)
+    snr = 10*np.log10(np.mean(blur_img_noised) / np.std(blur_img_noised))
+    K = 1 / snr / blur_img.size
+    print(" with K :", K)
     noise_deblur = invFt(ft_blur_img_noised\
                  / (ft_blur_kernel + K))\
                  [0:orig_img.shape[0], 0:orig_img.shape[1]]
@@ -95,7 +86,7 @@ if __name__ == '__main__':
     print("kdiv10 PSNR =", psnr_kdiv10)
 
     #Additional Task - improve deblurring quality
-    print("Additional Task")
+    print("\nAdditional Task")
 
 
     #show results
@@ -104,6 +95,33 @@ if __name__ == '__main__':
     ft_noise_deblur = ft(noise_deblur, blur_img.shape)
     ft_k_mult10 = ft(k_mult10, blur_img.shape)
     ft_k_div10 = ft(k_div10, blur_img.shape)
+
+    image_print_name_list  = [
+                              'Task2 - Blur with noise',\
+                              'Task2 - Noise deblur',\
+                              'Task3 - Apply K * 10',\
+                              'Task3 - Apply K / 10',\
+                              'FT - Blur with noise',\
+                              'FT - Noise deblur',\
+                              'FT - deblur with K * 10',\
+                              'FT - deblur with K / 10']
+    image_print_image_list = [
+                               blur_img_noised,\
+                               noise_deblur,\
+                               k_mult10,\
+                               k_div10,\
+                               abs(ft_blur_img_noised)*blur_img.size/255*2,\
+                               abs(ft_noise_deblur)*blur_img.size/255*2,\
+                               abs(ft_k_mult10)*blur_img.size/255*2,\
+                               abs(ft_k_div10)*blur_img.size/255*2]
+
+    print("\nshow result image")
+    showImageCV(image_print_name_list, \
+              image_print_image_list)
+
+
+'''
+
     image_print_name_list  = ['Original Image',\
                               'Blur kernel',\
                               'Task1 - Blurred Image',\
@@ -137,6 +155,7 @@ if __name__ == '__main__':
                                abs(ft_k_mult10)*blur_img.size/255*2,\
                                abs(ft_k_div10)*blur_img.size/255*2]
 
-    print("show result image")
+    print("\nshow result image")
     showImage(image_print_name_list, \
               image_print_image_list)
+'''

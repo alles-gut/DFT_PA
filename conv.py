@@ -24,6 +24,6 @@ def conv(arr1, arr2):
             conv_arr[i:i+col_arr2, j:j+row_arr2]\
                     = conv_arr[i:i+col_arr2, j:j+row_arr2]\
                     + ( arr1[i+int((col_arr2-1)/2), j+int((row_arr2-1)/2)]\
-                    * arr2 )
+                    * np.flip(arr2) )
 
     return conv_arr
