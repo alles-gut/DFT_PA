@@ -3,10 +3,14 @@
 
 import numpy as np
 
-def makeSomeNoise(mean, var, size):
+def makeSomeNoise(mean, var, img):
     print("Generating noise")
-    noise = np.zeros(size)
     sigma = var**0.5
-    gauss_noise = np.random.normal(mean,sigma,size)
+    shape = img.shape
+    noise = np.random.normal(mean,sigma,shape)
 
-    return gauss_noise
+    noisy_img = img + noise
+    noisy_img[noisy_img>1] = 1
+    noisy_img[noisy_img<0] = 0
+
+    return noisy_img

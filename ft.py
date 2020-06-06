@@ -9,7 +9,6 @@ import numpy as np
 def ft (arr, size):
     col_arr  = arr.shape[0]
     row_arr  = arr.shape[1]
-    size_arr = arr.size
 
     if size[0] >= col_arr and size[1] >= row_arr:
         temp = np.zeros(size)
@@ -17,7 +16,6 @@ def ft (arr, size):
         arr = temp
         col_arr = size[0]
         row_arr = size[1]
-        size_arr = col_arr * row_arr
 
     m = np.ones([col_arr, col_arr])
     wm = np.ones([col_arr, col_arr])
@@ -33,7 +31,7 @@ def ft (arr, size):
     wn = np.exp(wn * n * 1j)
 
     ft_arr = np.zeros([col_arr, row_arr],dtype=complex)
-    ft_arr = np.matmul(np.matmul(wm, arr), wn) / size_arr
+    ft_arr = np.matmul(np.matmul(wm, arr), wn)
 
     return ft_arr
 
@@ -57,6 +55,6 @@ def invFt (arr):
     wn = np.exp(wn * n * 1j)
 
     invft_arr = np.zeros([col_arr, row_arr],dtype=complex)
-    invft_arr = np.matmul(np.matmul(wm, arr), wn)
+    invft_arr = np.matmul(np.matmul(wm, arr), wn) / (col_arr*row_arr)
 
     return invft_arr
