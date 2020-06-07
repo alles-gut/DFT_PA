@@ -18,12 +18,11 @@ def conv(arr1, arr2):
     del(temp)
 
     conv_arr = np.zeros((col_arr1+col_arr2-1, row_arr1+row_arr2-1))
-    arr2 = np.flip(arr2)
     for i in range(col_arr1):
         for j in range(row_arr1):
             conv_arr[i:i+col_arr2, j:j+row_arr2]\
                     = conv_arr[i:i+col_arr2, j:j+row_arr2]\
                     + ( arr1[i+int((col_arr2-1)/2), j+int((row_arr2-1)/2)]\
-                    * np.flip(arr2) )
+                    * arr2 )
 
     return conv_arr

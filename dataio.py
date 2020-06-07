@@ -3,6 +3,7 @@
 
 import cv2
 import matplotlib.pyplot as plt
+import os
 from scipy import io
 
 def loadImage(path):
@@ -34,3 +35,13 @@ def showImageCV(namelist, imglist):
     k = cv2.waitKey(0)
     if k == 27:
         cv2.destroyAllWindows()
+
+def saveImage(namelist, imglist):
+    folder = 'result'
+    if not os.path.exists(folder):
+        os.mkdir(folder)
+    for i in range(len(namelist)):
+        dir = os.path.join(folder, namelist[i] + '.jpg')
+        print(dir)
+        img  = imglist[i]
+        cv2.imwrite(dir, img)
