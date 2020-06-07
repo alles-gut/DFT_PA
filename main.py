@@ -116,7 +116,7 @@ if __name__ == '__main__':
                          / (abs(ft_blur_kernel)**2 + K_))\
                          [0:orig_img.shape[0], 0:orig_img.shape[1]]
     noise_deblur_k_ = abs(noise_deblur_k_)
-    noise_deblur_k_ = crimmins(abs(noise_deblur_k_)*255)/255
+    #noise_deblur_k_ = crimmins(abs(noise_deblur_k_)*255)/255
 
     average_K_  = filter(noise_deblur_k_, 'average', 3, None)
     gaussian_K_ = filter(noise_deblur_k_, 'gaussian', 3, 1)
